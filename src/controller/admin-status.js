@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken"
 import order from "../model/order.js"
+import Log from "../model/logs.js"
 
 async function stat(value, reason = null){
    if(value == 0){
@@ -14,6 +15,7 @@ async function stat(value, reason = null){
 }
 
 async function adminStatus(req, res){
+const adminEmail = jwt.decode(req.cookies.uid).email
 
 const list = await order.find({is_Payed:true, status:0})
 const array = list.reverse();
@@ -55,7 +57,16 @@ for (let index = 0; index < array.length; index++) {
                 </div>
             </div>`
 }
-res.render("history", {html:html})   
 
+// Log the view action
+await Log.create({
+    action: 'VIEW',
+    entity: 'ORDER',
+    adminEmail: adminEmail,
+    description: 'Viewed pending orders',
+    ipAddress: req.ip
+});
+
+res.render("admin/orders", {html:html})   
 }
 export default adminStatus

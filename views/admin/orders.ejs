@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders - Admin Panel</title>
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/history.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/categories">Categories</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin-status" class="active">Orders</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/admin/logs">Logs</a></li>
+                <li><a href="/home">Back to Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Pending Orders</h1>
+            </header>
+            
+            <div class="admin-content">
+                <div class="hero-body">
+                    <%- html %>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div class="error_box hidden">
+        <img src="media/svg/error.svg" alt="">
+        <p id="error_msg">Something went wrong</p>
+    </div>
+    
+    <script>
+        document.querySelectorAll(".toggle").forEach((button) => {
+            document.querySelectorAll(".hero-section").forEach((section) => {
+                    section.classList.add("less");
+                    section.querySelector(".toggle").textContent = "Show More";
+                });
+            button.addEventListener("click", (e) => {
+                e.preventDefault();
+                
+                const heroSection = button.closest(".hero-section");
+                heroSection.classList.toggle("less");
+                button.textContent = heroSection.classList.contains("less") ? "Show More" : "Show Less";
+            });
+        });
+
+        function submit_form(){
+            const reason = document.getElementById("desc").value;
+            const error = document.getElementById("error_msg");
+            const box = document.querySelector(".error_box");
+            function close(){
+                setTimeout(() => {
+                    box.classList.add("hidden");
+                }, 2000);
+            }
+            if (!reason) {
+                error.innerText = "Reason is required";
+                box.classList.remove("hidden");
+                close()
+            }
+            else{
+                document.querySelector(".form_box").submit()
+            }
+        }
+        
+        function approve(id){
+            window.location.href = `/approved?orderId=${id}`
+        }
+    </script>
+</body>
+</html>

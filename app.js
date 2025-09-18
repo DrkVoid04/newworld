@@ -5,6 +5,7 @@ import auth from "./src/routes/user.js"
 import store from "./src/routes/store.js"
 import cookieParser from 'cookie-parser';
 import admin from "./src/routes/admin.js"
+import adminPanel from "./src/routes/admin-panel.js"
 
 
 const app = express()
@@ -24,6 +25,7 @@ app.use("/", main)
 app.use("/", auth)
 app.use("/", store)
 app.use("/", admin)
+app.use("/", adminPanel)
 
 
 app.listen(port, () => {

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Trace Mc</title>
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="/admin" class="active">Dashboard</a></li>
+                <li><a href="/admin/categories">Categories</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin-status">Orders</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/admin/logs">Logs</a></li>
+                <li><a href="/home">Back to Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Dashboard</h1>
+            </header>
+            
+            <div class="admin-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Categories</h3>
+                        <p class="stat-number"><%= categories.length %></p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Products</h3>
+                        <p class="stat-number"><%= products %></p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Recent Logs</h3>
+                        <p class="stat-number"><%= logs.length %></p>
+                    </div>
+                </div>
+                
+                <div class="recent-activity">
+                    <h2>Recent Activity</h2>
+                    <div class="activity-list">
+                        <% logs.forEach(log => { %>
+                        <div class="activity-item">
+                            <div class="activity-icon <%= log.action.toLowerCase() %>">
+                                <%= log.action.charAt(0) %>
+                            </div>
+                            <div class="activity-details">
+                                <p><strong><%= log.action %></strong> - <%= log.entity %></p>
+                                <p><%= log.description %></p>
+                                <small><%= new Date(log.timestamp).toLocaleString() %></small>
+                            </div>
+                        </div>
+                        <% }) %>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

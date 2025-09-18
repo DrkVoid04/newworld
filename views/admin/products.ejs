@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Admin Panel</title>
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/categories">Categories</a></li>
+                <li><a href="/admin/products" class="active">Products</a></li>
+                <li><a href="/admin-status">Orders</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/admin/logs">Logs</a></li>
+                <li><a href="/home">Back to Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Products</h1>
+                <div class="header-actions">
+                    <select id="categorySelect" onchange="filterByCategory()">
+                        <option value="">Select Category</option>
+                        <% categories.forEach(category => { %>
+                        <option value="<%= category.name %>" <%= selectedCategory && selectedCategory.name === category.name ? 'selected' : '' %>>
+                            <%= category.displayName %>
+                        </option>
+                        <% }) %>
+                    </select>
+                    <% if (selectedCategory) { %>
+                    <button class="btn btn-primary" onclick="openModal('createModal')">Create Product</button>
+                    <% } %>
+                </div>
+            </header>
+            
+            <div class="admin-content">
+                <% if (selectedCategory) { %>
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>Banner</th>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Discount</th>
+                                <th>Product ID</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% products.forEach(product => { %>
+                            <tr>
+                                <td>
+                                    <% if (product.preview.banner) { %>
+                                        <img src="<%= product.preview.banner %>" alt="Banner" class="product-banner">
+                                    <% } else { %>
+                                        <div class="no-image">No Banner</div>
+                                    <% } %>
+                                </td>
+                                <td><%= product.name %></td>
+                                <td>₹<%= product.price.amount %></td>
+                                <td><%= product.price.off %>%</td>
+                                <td><%= product.product_id %></td>
+                                <td>
+                                    <button class="btn btn-sm btn-secondary" onclick="editProduct('<%= product._id %>')">Edit</button>
+                                    <a href="/admin/products/<%= product._id %>/delete" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')">Delete</a>
+                                </td>
+                            </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+                <% } else { %>
+                <div class="empty-state">
+                    <h3>Select a category to view products</h3>
+                    <p>Choose a category from the dropdown above to manage products.</p>
+                </div>
+                <% } %>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Modal -->
+    <div id="createModal" class="modal">
+        <div class="modal-content large">
+            <span class="close" onclick="closeModal('createModal')">&times;</span>
+            <h2>Create Product</h2>
+            <form action="/admin/products" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="type" value="<%= selectedCategory ? selectedCategory.name : '' %>">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Product Name:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product_id">Product ID:</label>
+                        <input type="text" id="product_id" name="product_id" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="short_desc">Short Description:</label>
+                    <input type="text" id="short_desc" name="short_desc" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="desc">Full Description:</label>
+                    <textarea id="desc" name="desc" required></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">Price (₹):</label>
+                        <input type="number" id="amount" name="amount" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="off">Discount (%):</label>
+                        <input type="number" id="off" name="off" min="0" max="100" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="value">Value (for commands/permissions):</label>
+                    <input type="text" id="value" name="value" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="perks">Perks (one per line):</label>
+                    <textarea id="perks" name="perks" placeholder="Enter each perk on a new line"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="redirect">Redirect URL:</label>
+                    <input type="url" id="redirect" name="redirect">
+                </div>
+
+                <h3>Images</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="banner">Banner Image:</label>
+                        <input type="file" id="banner" name="banner" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="rankImage">Rank Image:</label>
+                        <input type="file" id="rankImage" name="rankImage" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="chatImage">Chat Image:</label>
+                        <input type="file" id="chatImage" name="chatImage" accept="image/*">
+                    </div>
+                    <div class="form-group">
+                        <label for="playerPreview">Player Preview:</label>
+                        <input type="file" id="playerPreview" name="playerPreview" accept="image/*">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Create Product</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function filterByCategory() {
+            const category = document.getElementById('categorySelect').value;
+            if (category) {
+                window.location.href = `/admin/products?category=${category}`;
+            } else {
+                window.location.href = '/admin/products';
+            }
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function editProduct(id) {
+            // Implementation for edit product
+            console.log('Edit product:', id);
+        }
+
+        function deleteProduct(id) {
+            if (confirm('Are you sure you want to delete this product?')) {
+                window.location.href = `/admin/products/${id}/delete`;
+            }
+        }
+
+        // Handle perks textarea - convert to array
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const perksTextarea = document.getElementById('perks');
+            const perksValue = perksTextarea.value;
+            
+            // Clear the textarea
+            perksTextarea.value = '';
+            
+            // Create hidden inputs for each perk
+            const perksArray = perksValue.split('\n').filter(perk => perk.trim() !== '');
+            perksArray.forEach(perk => {
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'perks';
+                input.value = perk.trim();
+                this.appendChild(input);
+            });
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

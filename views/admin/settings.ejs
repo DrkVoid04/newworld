@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - Admin Panel</title>
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/categories">Categories</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin-status">Orders</a></li>
+                <li><a href="/admin/settings" class="active">Settings</a></li>
+                <li><a href="/admin/logs">Logs</a></li>
+                <li><a href="/home">Back to Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>Admin Settings</h1>
+            </header>
+            
+            <div class="admin-content">
+                <div class="settings-grid">
+                    <!-- Payment Settings -->
+                    <div class="settings-card">
+                        <h3>Payment Settings</h3>
+                        <div class="password-protected" data-section="payment">
+                            <input type="password" placeholder="Enter admin password" class="password-input">
+                            <button onclick="verifyPassword('payment')" class="btn btn-sm">Unlock</button>
+                        </div>
+                        <div class="settings-content hidden" id="payment-content">
+                            <form action="/admin/settings" method="POST">
+                                <div class="form-group">
+                                    <label for="upi">UPI ID:</label>
+                                    <input type="text" id="upi" name="upi" value="<%= settings?.upi || '' %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update Payment Settings</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Server Settings -->
+                    <div class="settings-card">
+                        <h3>Server Settings</h3>
+                        <form action="/admin/settings" method="POST">
+                            <div class="form-group">
+                                <label for="ip">Server IP:</label>
+                                <input type="text" id="ip" name="ip" value="<%= settings?.ip || '' %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="port">Server Port:</label>
+                                <input type="text" id="port" name="port" value="<%= settings?.port || '' %>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Server Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- RCON Settings -->
+                    <div class="settings-card">
+                        <h3>RCON Settings</h3>
+                        <div class="password-protected" data-section="rcon">
+                            <input type="password" placeholder="Enter admin password" class="password-input">
+                            <button onclick="verifyPassword('rcon')" class="btn btn-sm">Unlock</button>
+                        </div>
+                        <div class="settings-content hidden" id="rcon-content">
+                            <form action="/admin/settings" method="POST">
+                                <div class="form-group">
+                                    <label for="rcon_ip">RCON IP:</label>
+                                    <input type="text" id="rcon_ip" name="rcon_ip" value="<%= settings?.rcon_ip || '' %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rcon_port">RCON Port:</label>
+                                    <input type="text" id="rcon_port" name="rcon_port" value="<%= settings?.rcon_port || '' %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="rcon_pass">RCON Password:</label>
+                                    <input type="password" id="rcon_pass" name="rcon_pass" value="<%= settings?.rcon_pass || '' %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Update RCON Settings</button>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Website Settings -->
+                    <div class="settings-card">
+                        <h3>Website Settings</h3>
+                        <form action="/admin/settings" method="POST">
+                            <div class="form-group">
+                                <label for="website_link">Website Link:</label>
+                                <input type="url" id="website_link" name="website_link" value="<%= settings?.website_link || '' %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="discord_link">Discord Link:</label>
+                                <input type="url" id="discord_link" name="discord_link" value="<%= settings?.discord_link || '' %>">
+                            </div>
+                            <div class="form-group">
+                                <label for="mail">Contact Email:</label>
+                                <input type="email" id="mail" name="mail" value="<%= settings?.mail || '' %>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Website Settings</button>
+                        </form>
+                    </div>
+
+                    <!-- Discord Banner -->
+                    <div class="settings-card">
+                        <h3>Discord Banner</h3>
+                        <form action="/admin/settings" method="POST" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="discord_banner">Discord Banner (Image/Video):</label>
+                                <input type="file" id="discord_banner" name="discord_banner" accept="image/*,video/*">
+                                <% if (settings?.discord_banner) { %>
+                                <div class="current-file">
+                                    <p>Current: <a href="<%= settings.discord_banner %>" target="_blank">View Current Banner</a></p>
+                                </div>
+                                <% } %>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Update Discord Banner</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        function verifyPassword(section) {
+            const passwordInput = document.querySelector(`[data-section="${section}"] .password-input`);
+            const password = passwordInput.value;
+            
+            // Simple password check - in production, this should be more secure
+            if (password === 'admin123') { // Change this to your actual admin password
+                document.querySelector(`[data-section="${section}"]`).style.display = 'none';
+                document.getElementById(`${section}-content`).classList.remove('hidden');
+            } else {
+                alert('Incorrect password!');
+                passwordInput.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

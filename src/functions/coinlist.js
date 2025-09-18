@@ -1,7 +1,10 @@
 import product from "../model/ranks.js";
+import Category from "../model/category.js";
 
 async function createCoinlist(){
-const array = await product.find({type:"coin"})
+// Get active categories first
+const categories = await Category.find({isActive: true});
+const categoryNames = categories.map(cat => cat.name);
 let hero = ''
    for (let index = 0; index < array.length; index++) {
     const element = array[index];
@@ -27,4 +30,11 @@ let hero = ''
    return hero
 }
 
+// Get products from active categories, fallback to "coin" for backward compatibility
+const array = await product.find({
+    $or: [
+        {type: {$in: categoryNames}},
+        {type: "coin"} // backward compatibility
+    ]
+});
 export default createCoinlist;

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logs - Admin Panel</title>
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+    <div class="admin-container">
+        <nav class="admin-sidebar">
+            <div class="admin-logo">
+                <h2>Admin Panel</h2>
+            </div>
+            <ul class="admin-nav">
+                <li><a href="/admin">Dashboard</a></li>
+                <li><a href="/admin/categories">Categories</a></li>
+                <li><a href="/admin/products">Products</a></li>
+                <li><a href="/admin-status">Orders</a></li>
+                <li><a href="/admin/settings">Settings</a></li>
+                <li><a href="/admin/logs" class="active">Logs</a></li>
+                <li><a href="/home">Back to Site</a></li>
+            </ul>
+        </nav>
+        
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1>System Logs</h1>
+            </header>
+            
+            <div class="admin-content">
+                <div class="logs-container">
+                    <% logs.forEach(log => { %>
+                    <div class="log-entry <%= log.action.toLowerCase() %>">
+                        <div class="log-header">
+                            <span class="log-action"><%= log.action %></span>
+                            <span class="log-entity"><%= log.entity %></span>
+                            <span class="log-time"><%= new Date(log.timestamp).toLocaleString() %></span>
+                        </div>
+                        <div class="log-description">
+                            <%= log.description %>
+                        </div>
+                        <% if (log.adminEmail) { %>
+                        <div class="log-admin">
+                            By: <%= log.adminEmail %>
+                        </div>
+                        <% } %>
+                        <% if (log.ipAddress) { %>
+                        <div class="log-ip">
+                            IP: <%= log.ipAddress %>
+                        </div>
+                        <% } %>
+                    </div>
+                    <% }) %>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <% if (hasPrev) { %>
+                    <a href="/admin/logs?page=<%= currentPage - 1 %>" class="btn btn-secondary">Previous</a>
+                    <% } %>
+                    
+                    <span class="page-info">Page <%= currentPage %> of <%= totalPages %></span>
+                    
+                    <% if (hasNext) { %>
+                    <a href="/admin/logs?page=<%= currentPage + 1 %>" class="btn btn-secondary">Next</a>
+                    <% } %>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

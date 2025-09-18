@@ -1,7 +1,19 @@
 import product from "../model/ranks.js";
+import Category from "../model/category.js";
 
 async function createRanklist(){
-const array = await product.find({type:"rank"})
+// Get active categories first
+const categories = await Category.find({isActive: true});
+const categoryNames = categories.map(cat => cat.name);
+
+// Get products from active categories, fallback to "rank" for backward compatibility
+const array = await product.find({
+    $or: [
+        {type: {$in: categoryNames}},
+        {type: "rank"} // backward compatibility
+    ]
+});
+
 let hero = ''
    for (let index = 0; index < array.length; index++) {
     const element = array[index];

@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "minecraft-server-util": "^5.4.4",
     "mongoose": "^8.7.0",
+    "multer": "^2.0.2",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.9.16",
     "qrcode": "^1.5.4",
