@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Rank</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #101010;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 400px;
+    background-color: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.purchase-rank h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #dcdcdc;
+}
+
+.vip-rank {
+    margin-bottom: 30px;
+}
+
+.vip-rank h2 {
+    font-size: 20px;
+    color: #00ff00;
+    margin-bottom: 10px;
+}
+
+.vip-rank p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.vip-rank .price {
+    font-size: 16px;
+    margin-top: 10px;
+    color: #00ff00;
+}
+
+.signup-form {
+    text-align: left;
+}
+
+.signup-form label {
+    font-size: 14px;
+    color: #ccc;
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 4px;
+    border: 1px solid #333;
+    background-color: #262626;
+    color: #fff;
+}
+
+.signup-form .checkbox label, .signup-form .checkbox input{
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.signup-form .checkbox input {
+    margin-right: 10px;
+}
+
+.signup-form .checkbox label a {
+    color: #00ff00;
+    text-decoration: none;
+}
+
+.signup-form .checkbox label a:hover {
+    text-decoration: underline;
+}
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #00ff00;
+    color: #000;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #00cc00;
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="purchase-rank">
+            <h1>Purchase Rank</h1>
+        </div>
+
+        <div class="vip-rank">
+            <h2>VIP Rank</h2>
+            <p>Ajj hi kharide ye rank aur paae tengen ki gand free me.</p>
+            <p class="price">Price : 133.00 INR</p>
+        </div>
+
+        <form class="signup-form" method="post" action="/payment">
+            <label for="username">Minecraft Username</label>
+            <input type="text" id="username" name="username" placeholder="Minecraft Username">
+
+            <label for="discord">Discord Username</label>
+            <input type="text" id="discord" name="discord" placeholder="Discord Username">
+ 
+            <input type="hidden" name="product_id" value="dummy">
+
+            <div class="checkbox">
+                <!-- <input type="checkbox" id="terms"> -->
+                <label for="terms">I accept the <a href="#">terms and serveries</a></label>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

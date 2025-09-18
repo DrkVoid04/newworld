@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trace Mc</title>
+<link rel="icon" type="image/png" href="media/favicon.png">
+<link rel="stylesheet" href="shop.css">
+</head>
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <nav class="desktop_navbar">
+      <a href="#"><img class="desktop_navbar_logo_img" src="media/logo_small.png" alt="logo"></a>
+      <a href="https://wiki.example.com/" class="desktop_navbar_link">Posts</a>
+      <a href="#discord" class="desktop_navbar_link scroll">Community</a>
+      <a href="#about" class="desktop_navbar_link scroll">About Us</a>
+      <a href="#about" class="desktop_navbar_link scroll">Shop</a>
+      <div class="desktop_navbar_link2_div">
+          <a href="#join" class="desktop_navbar_link2 scroll">Login</a>
+      </div>
+    </nav>
+    <div class="mobile_navbar">
+      <a href="#" class="mobile_navbar_logo_img_a"><img class="mobile_navbar_logo_img" src="media/logo_small.png" alt="logo"></a>
+      <div id="mobile_navbar_links">
+          <a class="mobile_navbar_link" onclick="mobile_navbar_link_hider()" href="https://wiki.example.com/">Wiki</a>
+          <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#discord">Community</a>
+          <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#about">About Us</a>
+          <a class="mobile_navbar_link scroll" onclick="mobile_navbar_link_hider()" href="#join">Login</a>
+        </div>
+        <div class="icon" onclick="mobile_navbar_link_hider()">
+            <i class="fa fa-bars"></i>
+    </div>
+</div> -->
+<div class="shop-select">
+  <div class="button shop-open">
+    <img src="./media/shop-add.png" alt="">
+  </div>
+  <div class="shop-menu shop-hidden" >
+    <!-- <div class="shop-option shop-hidden" data-value="ranks" onclick="select_menu_close('shop')">
+      <img src="./media/svg/crown.svg" alt=""> <p>Shop</p>
+    </div>
+    <div class="shop-option shop-hidden" data-value="coins" onclick="select_menu_close('coins')">
+      <img src="./media/svg/coin.svg" alt=""> <p>Coins</p>
+    </div> -->
+    <div class="shop-option shop-hidden" data-value="home" onclick="select_menu_close('home')">
+      <img src="./media/svg/home.svg" alt=""> <p>Home</p>
+    </div>
+    <div class="shop-option shop-hidden" data-value="status" onclick="select_menu_close('status')">
+      <img src="./media/svg/status.svg" alt=""> <p>Status</p>
+    </div>
+    
+  </div>
+</div>
+<script>
+function options(value){
+  if(value == 'ranks'){
+    document.querySelector(".ranks").classList.remove("hidden")
+    document.querySelector(".coins").classList.add("hidden")
+  }
+  else if(value == 'coins'){
+    document.querySelector(".ranks").classList.add("hidden")
+    document.querySelector(".coins").classList.remove("hidden")
+  }
+}
+document.body.addEventListener("click", () => {
+  select_menu_close(close)
+});
+document.querySelector(".shop-open").addEventListener("click", ()=>{
+  select_menu_open()
+  event.stopPropagation();
+})
+function select_menu_open(){
+document.querySelector(".button").classList.add("hidden")
+document.querySelector(".shop-menu").classList.remove("shop-hidden")
+document.querySelectorAll(".shop-option").forEach((e) => {
+  e.classList.remove("shop-hidden")
+})
+
+}
+function select_menu_close(value){
+  if(value == 'shop'){
+    document.querySelector(".ranks").classList.remove("hidden")
+    document.querySelector(".coins").classList.add("hidden")
+  }
+  else if(value == 'coins'){
+    document.querySelector(".ranks").classList.add("hidden")
+    document.querySelector(".coins").classList.remove("hidden")
+  }
+  else if(value == 'status'){
+    window.location.href = '/status';
+  }
+  else if(value == 'home'){
+    window.location.href = '/home';
+  }
+  else if(value == 'close'){
+
+  }
+document.querySelector(".button").classList.remove("hidden")
+document.querySelector(".shop-menu").classList.add("shop-hidden")
+document.querySelectorAll(".shop-option").forEach((e) => {
+  e.classList.add("shop-hidden")
+})
+
+}
+</script>
+<span class="mainbar">
+  <button class="mainbar-options mainbar-options-selected" onclick="options('ranks')">
+    Ranks
+  </button>
+  <button class="mainbar-options " onclick="options('coins')">
+    Coins
+  </button>
+  <!-- <button class="mainbar-options">
+    Keys
+  </button> -->
+</span>
+<div class="main2 ranks">
+
+    <!-- <a class="headline">Server Ranks</a> -->
+    <div class="main2_features_div">
+            <!-- <div class="main2_feature">
+        <img class="main2_feature_img" alt="Feature Image" src="media/features/cracked.webp">
+        <a class="main2_feature_headline">5000 coins</a>
+        <a class="main2_feature_text">Make this desc of only 2 lines</a>
+        <span class="prize_box">
+          <span class="off"><p class="percent_off"><b>20%</b>off</p><p class="old_prize">$124</p></span>
+          <h1 class="new_prize">$124</h1>
+        </span>
+        <p class="read_more">Buy Now <img src="media/svg/arrow.svg" alt=""></p> -->
+      <%- ranks %>
+    </div>
+    
+</div>
+<div class="main2 coins hidden" >
+  
+  <!-- <a class="headline">Coins</a> -->
+  <div class="main2_features_div">
+    <!-- <div class="main2_feature">
+      <img class="main2_feature_img" alt="Feature Image" src="media/features/cracked.webp">
+      <a class="main2_feature_headline">5000 coins</a>
+      <a class="main2_feature_text">Make this desc of only 2 lines</a>
+      <span class="prize_box">
+        <span class="off"><p class="percent_off"><b>20%</b>off</p><p class="old_prize">$124</p></span>
+        <h1 class="new_prize">$124</h1>
+      </span>
+      <p class="read_more">Buy Now <img src="media/svg/arrow.svg" alt=""></p> -->
+      <%- coin  %>
+    </div>
+    
+  </div>
+</div>
+<script>
+  document.querySelectorAll(".mainbar-options").forEach((e)=>{
+    e.addEventListener("click", () => {
+      document.querySelector(".mainbar-options-selected").classList.remove("mainbar-options-selected")
+      e.classList.add("mainbar-options-selected")
+    })
+  })
+  function redi(product_key){
+    window.location.href = `/shop/ranks?product=${product_key}`
+  }
+  function redi(value){
+    window.location.href = `/store/product?product_id=${value}`
+  }
+  function buy(value){
+    window.location.href = `/purchase?product=${value}`
+  }
+   let card = document.querySelectorAll(".main2_feature")
+   card.forEach((e)=>{
+    e.addEventListener("hover",()=>{
+        document.querySelector()
+    })
+   })
+  </script>
+</body>
+</html>

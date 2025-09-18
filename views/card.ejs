@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trace Mc</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="css/card.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+    --nice-padding: 6rem;
+    --roundness: 0.5rem;
+    /* --accent2: #05b305; */
+    --set1: "poppins",sans-serif;
+    --accent1: #02fbff;
+    --accent2: #039b9e;
+    --accent2_transp: #02fbff53;
+    --background1: #212529;
+    --background2: #16191b;
+    --underline: white;
+    --background3: #101214;
+    color-scheme: dark;
+}
+::selection{
+    background-color: transparent;
+    color: white;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+html{
+    height: 100%;
+}
+body{
+    height: 100%;
+    background-color: var(--background3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+main{
+    height: min(600px, 95vh);
+    width: min(1200px, 95vw);
+    border-radius: var(--roundness);
+    background-color: var(--background2);
+    position: relative;
+    display: flex;
+}
+.main-banner{
+  width: 25%;
+  overflow: hidden;
+
+}
+::-webkit-scrollbar{
+    width: 0px;
+}
+.main-banner img{
+object-fit: cover;
+object-position: center center;
+border-top-left-radius: var(--roundness);
+border-bottom-left-radius: var(--roundness);
+opacity: 70%;
+height: 100%;
+width: 100%;
+}
+
+.main-details{
+    width: 75%;
+    padding: 2rem;
+    box-sizing: border-box;
+    overflow-y: scroll;
+}
+.main-details h1{
+  margin: 0.5rem 0;
+  font-size: 1.8rem;
+  font-family:var(--set1);
+  font-weight: 400;
+  color: var(--accent1);
+}
+.main-details h2{
+    margin: 0;
+    font-size: 0.9rem;
+    font-family:var(--set1);
+    font-weight: 300;
+    color: #afafaf;
+    width: 80%;
+}
+.main-details h3{
+    margin: 0;
+    margin-top: 1.8rem;
+    margin-bottom: 0.7rem;
+    font-size: 1.2rem;
+    font-family:var(--set1);
+    font-weight: 400;
+}
+.main-details h4{
+    margin: 0;
+    font-size: 0.8rem;
+    font-family: var(--set1);
+    font-weight: 300;
+    color: rgb(173, 173, 173);
+}
+.payment-option{
+    display: inline-block;
+}
+.payment-option .off{
+display: flex;
+align-items: center;
+gap: 0.7rem;
+}
+.off h4{
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--accent1);
+    font-weight: 500;
+    text-decoration: line-through 1.5px;
+}
+.off h5{
+    margin: 0;
+    padding: 1px 10px;
+    font-size: 0.8rem;
+    border-radius: 50px;
+    font-family: var(--set1);
+    font-weight: 400;
+    background-color: var(--accent1);
+    color: var(--background2);
+    b{
+        font-weight: 500;
+    }
+}
+.payment-option .details h1{
+   color: white;
+   margin: 0;
+   font-size: 2.5rem;
+   font-weight: 400;
+   line-height: 2.7rem;
+   margin-top: 8px;
+}
+.payment-option button{
+    width: 140%;
+    border: none;
+    font-size: 0.9rem;
+    color: var(--background2);
+    font-family: var(--set1);
+    font-weight: 500;
+    cursor: pointer;
+    border-radius: var(--roundness);
+    padding: 0.8rem;
+    scale: 100%;
+    transition: all 300ms ease-in-out;
+    background-color: var(--accent1);
+}
+.payment-option button:hover{
+    scale: 110%;
+    filter: brightness(110%);
+}
+.tab-image{
+    width: min(100%,200px);
+    height: 30px;
+}
+.chat-image{
+    width: min(100%,300px);
+    height: 30px;
+}
+.tag-image{
+    width: min(100%,200px);
+    height: 70px;
+}
+.image{
+    margin: 1rem 0;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+}
+.payment-option-pc{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 2;
+    button{
+        scale: 100%;
+        width: 11rem;
+    }
+}
+.payment-option-mobile{
+    display: none;
+    margin-top: 2rem;
+}
+
+@media (max-width:800px) {
+    .payment-option-pc{
+        display: none;
+    }
+    .payment-option-mobile{
+        display: inline-block;
+    }
+    
+    main{
+        width: min(500px,95vw);
+        height: 95svh;
+        flex-direction: column;
+    }
+    .main-banner{
+        width: 100%;
+        height: 250px;
+        img{
+            border-bottom-left-radius: 0;
+            border-top-right-radius: var(--roundness);
+        }
+    }
+    .main-details{
+        width: 100%;
+    }
+}
+@media (max-width:500px) {
+    html{
+        height: 100svh;
+    }
+    main{
+        width: 100%;
+        height: 100%;
+        flex-direction: column;
+    }
+    .main-banner{
+        width: 100%;
+        height: 250px;
+        img{
+            border-radius: 0;
+        }
+    }
+}
+.back{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    width: 45px;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--background2);
+    cursor: pointer;
+    z-index: 105;
+    img{
+        color: white;
+    }
+}
+</style>
+</head>
+
+<body>
+    <span class="back" onclick="back()">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#ffffff" fill="none">
+            <path d="M3.99982 11.9998L19.9998 11.9998" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M8.99963 17C8.99963 17 3.99968 13.3176 3.99966 12C3.99965 10.6824 8.99966 7 8.99966 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+    </span>
+    <main>
+        <!-- <div class="main-banner">
+            <img src="media/features/java-bedrock.png" alt="">
+        </div>
+        <div class="main-details">
+            <h1>Vip Rank</h1>
+            <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit voluptatum eligendi eaque velit, eius
+                tenetur dolore! A numquam nulla atque tempora. Doloremque, eum!</h2>
+            <h3>Perks</h3>
+            <h4>+ perks1</h4>
+            <h4>+ perks1</h4>
+            <h4>+ perks1</h4>
+            <h4>+ perks1</h4>
+            <h3>Previews</h3>
+            <div class="image-section">
+                <div class="tab-image image"><img src="" alt=""></div>
+                <div class="chat-image image"><img src="" alt=""></div>
+                <div class="tag-image image"><img src="" alt=""></div>
+            </div>
+            <div class="payment-option-mobile payment-option" >
+                <div class="details">
+                    <div class="off">
+                        <h5><b>10%</b> off</h5>
+                        <h4>₹100.00</h4>
+                    </div>
+                    <h1>₹90.00</h1>
+                </div>
+                <button onclick="red('')">Buy Now</button>
+            </div>
+            <div class="payment-option-pc payment-option">
+                <div class="details">
+                    <div class="off">
+                        <h5><b>10%</b> off</h5>
+                        <h4>₹100.00</h4>
+                    </div>
+                    <h1>₹90.00</h1>
+                </div>
+                <button onclick="red('')">Buy Now</button>
+            </div>
+        </div> -->
+        <%- card  %>
+    </main>
+    <script>
+        function back(){
+            window.location.href = "/store";
+        }
+        function red(product_id) {
+           window.location.href = `/purchase?product=${product_id}`
+        }
+    </script>
+</body>
+
+</html>

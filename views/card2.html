@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+  padding: 0px;
+  margin: 0px;
+}
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: black;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+:root {
+    --nice-padding: 6rem;
+    --roundness: 0.75rem;
+    /* --accent1: #02db02; */
+    --accent1: #00eb81;
+    /* --accent2: #05b305; */
+    --accent2: #009a55;
+    --accent2_transp: #00eb815b;
+    --background1: #212529;
+    --background2: #16191b;
+    --background3: #101214;
+    color-scheme: dark;
+}
+::selection{
+    background-color: var(--accent2);
+    color: white;
+}
+.o-bg {
+  transition: all 300ms ease-in;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background3);
+}
+.o-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  border-radius: var(--roundness);
+  background-color: var(--background2);
+  display: grid;
+  grid-template-columns: 25% 75%;
+}
+.img{
+  border-top-left-radius: var(--roundness);
+  border-bottom-left-radius: var(--roundness);
+  
+}
+.details {
+  position: relative;
+  padding: 15px;
+  overflow-y: scroll;
+  .Recommended {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    display: flex;
+    color: #ffb2d7;
+    font-family: "Inter";
+    font-size: 12px;
+    font-weight: bold;
+    gap: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .left {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    padding: 0px;
+  }
+  .left img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+  }
+  /* This is button sec */
+  button {
+    position: fixed;
+    bottom: 1.2rem;
+    right: 1.2rem;
+    background-color: var(--accent1);
+    color: var(--background2);
+    cursor: pointer;
+    font-family: "poppins", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    height: 3rem;
+    width: 12rem;
+    border-radius: 9px;
+    transition: all 300ms;
+    border: none;
+    scale: 1;
+  }
+  button:hover {
+    transform: scale(1.05);
+    background-color: var(--accent2);
+  }
+  .prizing {
+    font-family: "poppins", sans-serif;
+    position: fixed;
+    right: 1.2rem;
+    bottom: 4rem;
+  }
+  .prizing p, .prizing h1 {
+    display: inline-block;
+  }
+  .prize {
+    font-size: 40px;
+    color: white;
+    font-weight: 400;
+    text-align: right;
+  }
+  .off {
+    padding: 0.2rem 0.8rem;
+    border-radius: 200px;
+    font-size: 0.7rem;
+    background-color: var(--accent1);
+    color: var(--background2);
+  }
+  .old-prize {
+    padding: 0.2rem;
+    font-family: "poppins", sans-serif;
+    text-decoration: line-through solid 2px;
+    color: var(--accent1);
+    font-size: 0.8rem;
+  }
+
+  /* This is description sec */
+  .d-sec{
+    margin:2rem 1.3rem;
+    color: white;
+    font-family: "poppins",sans-serif;
+    h1 {
+      color: var(--accent1);
+      font-size: 2rem;
+      font-weight: 500;
+    }
+    #desc {
+      margin: 10px 0px;
+
+      font-size: 0.9rem;
+      width: 90%;
+      font-family: "poppins",sans-serif;
+      color: rgb(182, 182, 182);
+    }
+    h2 {
+      margin-top: 1.5rem;
+      margin-bottom: 0.7rem;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+    h4 {
+      font-size: 0.8rem;
+      font-weight: 300;
+      color: rgb(182, 182, 182);
+      width: 50%;
+    }
+  }
+}
+.preview{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.name_tab{
+    width: 200px;
+    height: 30px;
+}
+.name_tag{
+    width: 250px;
+    height: 120px;
+}
+.name_chat{
+    width: 300px;
+    height: 30px;
+}
+@media (max-width:960px) {
+  .o-box{
+    width: 90%;
+    height: 90%;
+  }
+}
+@media (max-width:650px) {
+  .o-bg{
+    height: 100%;
+  }
+  .o-box {
+    grid-template-columns: 100%;
+    grid-template-rows: 25% 75%;
+    overflow-x: scroll;
+  }
+  .img {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 0px;
+  }
+  .details {
+    overflow: visible;
+    box-sizing: content-box;
+    .left {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 0px;
+    }
+    .left img {
+      width: 22px;
+      height: 22px;
+    }
+    
+  }
+}
+@media (max-width:500px) {
+  .o-bg{
+    overflow: scroll;
+  }
+  .o-box {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    transform: translate(0%, 0%);
+    grid-template-columns: 100%;
+    grid-template-rows: 200px 900px;
+    width: 100%;
+    min-height: 1100px;
+    border-radius: 0px;
+  }
+  .img {
+    border-radius: 0px;
+  }
+  .details {
+    .left {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      padding: 0px;
+    }
+    .left img {
+      width: 22px;
+      height: 22px;
+      button{
+       right: none;
+       left: 15px;
+      }
+    }
+  }
+  button{
+    right: none;
+    left: 2rem;
+  }
+  .prizing{
+    right: none;
+    left: 2rem;
+  }
+  .prize{
+    text-align: right;
+  }
+}
+    </style>
+</head>
+<body>
+    <footer class="o-bg" >
+
+        <div class="o-box">
+            <!-- <div class="img"></div>
+            <div class="details">
+                <span class="left">
+                    <span title="for more info, click me!"><img  class="main-element" src="media/svg/info-circle.png" alt=""></span>
+                    <span title="close"><img data-info="close" class="main-element cancel"  src="media/svg/close-circle.svg" alt=""></span>          
+                    
+                </span>
+                <div class="d-sec">
+                    <h1 class="headline">VIP</h1>
+                    <h4 id="desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex earum officiis cumque quam commodi, amet cum, in autem repellendus, neque numquam nulla porro?.</h4>
+                    <h2>Perks</h2>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+                    <h4>+ An Example Perk</h4>
+
+                    <h2>Preview</h2>
+                    <span class="preview">
+                        <img src="media/features/ranks.jpg" alt="" class="name_tab">
+                        <img src="media/features/ranks.jpg" alt="" class="name_chat">
+                        <img src="media/features/ranks.jpg" alt="" class="name_tag">
+                    </span>
+                    <h4> &nbsp </h4> 
+                </div>
+                 <span class="prizing">
+                    <p class="off">SAVE <b>50%</b></p> <p class="old-prize">₹99.00</p><br>
+                    <h1 class="prize">₹49.00</h1>
+                </span>
+                <a href="/service?product=${product}">
+                    <button> Subscribe Now </button>
+                </a>
+            </div> -->
+            <%- card  %>
+        </div>
+     
+             </footer>
+<script>
+const banner = document.querySelector(".img").getAttribute("data-link")
+document.querySelector(".img").setAttribute("style",`background-image: url("${banner}");`)
+</script>
+</body>
+</html>

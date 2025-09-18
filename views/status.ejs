@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trace Mc</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="css/history.css">
+</head>
+
+<body>
+    <main class="hero">
+        <div class="hero-head">
+            <h1><ul>
+                <li><a href="/home">Home</a></li>
+                <li><a class="sel" href="/status">Status</a></li>
+                <li><a href="/support">Support</a></li>
+                <li><a href="/profile">Profile</a></li>
+            </ul></h1>
+        </div>
+        <div class="hero-body">
+            <!-- First Section -->
+            <!-- <div class="hero-section less">
+                <div class="hero-body-info">
+                    <div class="hero-body-info-div">
+                        <h2>Vip <p>🟡Pending</p></h2>
+                        <h3>Buy this rank to get cool perks in our SMP and many more rewards</h3>
+                    </div>
+                    <div class="hero-body-info-more">
+                        <h4><p>TXN ID: </p>DAFA87AFAS8FFSA</h4>
+                        <h4><p>Paid: </p>200.00 INR</h4>
+                        <h4><p>Date: </p>12/31/2024</h4>
+                    </div>
+                </div>
+                <div class="hero-body-name" style="justify-content: flex-end !important;">
+                    <div class="form-div">
+                        <button class="button toggle">Show More</button>
+                    </div>
+                </div>
+            </div> -->
+            <%- html %>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll(".toggle").forEach((button) => {
+            document.querySelectorAll(".hero-section").forEach((section) => {
+                    section.classList.add("less");
+                    section.querySelector(".toggle").textContent = "Show More";
+                });
+            button.addEventListener("click", (e) => {
+                e.preventDefault(); // Prevent any default behavior
+                
+                // Open only the clicked section
+                const heroSection = button.closest(".hero-section");
+                heroSection.classList.toggle("less");
+
+                // Update the button text based on the new state
+                button.textContent = heroSection.classList.contains("less") ? "Show More" : "Show Less";
+            });
+        });
+    </script>
+</body>
+
+</html>

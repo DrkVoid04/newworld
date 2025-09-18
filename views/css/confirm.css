@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+    --nice-padding: 6rem;
+    --roundness: 0.5rem;
+    /* --accent1: #02db02; */
+    --accent1: #02fbff;
+    --accent2: #039b9e;
+    --accent2_transp: #02fbff53;
+    --background1: #212529;
+    --background2: #16191b;
+    --underline: white;
+    --background3: #101214;
+    color-scheme: dark;
+}
+::selection{
+    background-color: transparent;
+    color: white;
+}
+html{
+    height: 100svh;
+}
+body{
+    height: 100%;
+    background-color: var(--background3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    width: 700px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.hero-head{
+width: 100%;
+height: 70px;
+background-color: #212529;
+border-radius: var(--roundness);
+display: flex;
+justify-content: center;
+align-items: center;
+}
+.hero-head h1{
+    font-size: 1.5rem;
+    font-family: "poppins";
+    font-weight: 400;
+
+}
+.hero-body{
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    gap: 16px;
+}
+.hero-body-info{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: var(--roundness);
+    justify-content: space-between;
+    align-items: center;
+    h2,h4{
+        margin: 0;
+    }
+}
+.hero-body-info h4{
+display: flex;
+font-size: 1.2rem;
+font-family: "poppins";
+font-weight: 400;  
+align-items: center;
+gap: 0.8rem;
+p{
+    color: #02fbff;
+    margin: 0;
+}
+
+}
+.hero-body-name{
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+    background-color: var(--background2);
+    border-radius: var(--roundness);
+    width: 100%;
+    justify-content: center;
+    align-items: center;  
+}
+
+
+
+.form-div{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+}
+.form_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap:1.6rem;
+    width: 100%;
+}
+input{
+    padding: 1rem 1rem;
+    padding-bottom: 0.6rem;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 1px solid var(--underline);
+    width: 100%;
+    background-color: transparent;
+}
+input:user-invalid, textarea:user-invalid{
+    border-bottom: 2px solid #FF5353;
+    color:  #FF5353;
+}
+input:user-invalid::placeholder, textarea:user-invalid::placeholder{
+    color: #fc5555a1;
+}
+input:user-valid, textarea:user-valid{
+    border-bottom: 2px solid var(--accent1);
+    color: var(--accent1);
+}
+input:focus{
+    outline: none;
+    background-color: var(--background3);
+}
+.form_submit{
+    
+    width: 100%;
+    margin: 1rem 0;
+    border-radius: var(--roundness);
+    font-family: "poppins", sans-serif;
+    background-color: var(--accent1);
+    color: var(--background2);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    
+}
+.form_submit:hover{
+    background-color:#5afcff;
+}
+.terms-div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.6rem;
+}
+#terms{
+    cursor: pointer;
+}
+label{
+    text-wrap: nowrap;
+    font-family: "poppins", sans-serif;
+    font-size: 0.9rem;
+}
+label a{
+    color: var(--accent1);
+    text-decoration: none;
+}
+@media (max-width:750px) {
+.hero-body{
+    flex-direction: column;
+    gap: 0;
+}
+.hero-body-info{
+width: 100%;
+gap: 1rem;
+border-radius:var(--roundness) var(--roundness) 0 0 ;
+}
+.hero-body-name{
+    border-radius: 0 0 var(--roundness) var(--roundness);
+    padding: 2rem;
+}
+}
+.error_box{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    height: 1.5rem;
+    width: 100%;
+    background-color: #FF5353;
+    color: white;
+    font-size: 1rem;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-family: "poppins", sans-serif;
+    transition: all 600ms ease-in-out;
+    opacity: 100%;
+    img{
+        height: 1.2rem;
+    }
+}
+.hidden{
+    opacity: 0%;
+    transform: translateY(100%);
+}

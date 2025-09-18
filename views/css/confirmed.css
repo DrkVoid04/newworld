@@ -1,0 +1,111 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+:root {
+    --nice-padding: 6rem;
+    --roundness: 0.5rem;
+    /* --accent1: #02db02; */
+    --accent1: #02fbff;
+    --accent2: #039b9e;
+    --accent2_transp: #02fbff53;
+    --background1: #212529;
+    --background2: #16191b;
+    --underline: white;
+    --background3: #101214;
+    color-scheme: dark;
+}
+::selection{
+    background-color: transparent;
+    color: white;
+}
+html{
+    height: 100svh;
+}
+body{
+    height: 100%;
+    background-color: var(--background3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+main{
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.hero-body{
+    width: 100%;
+    min-height: 300px;
+    background-color: var(--background2);
+    border-radius: var(--roundness);
+    display: flex;
+    padding: 1.5rem 3rem;
+    box-sizing: border-box;
+}
+.hero-body-info{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    h2,h4{
+        margin: 0;
+    }
+}
+.hero-body-info h2{
+    font-size: 1.9rem;
+    font-family: "poppins", sans-serif;
+    font-weight: 400;
+    color: #02fbff;
+}
+.hero-body-info h3{
+    margin:0.5rem 0;
+    font-size: 1.3rem;
+    font-family: "poppins";
+    font-weight: 400;
+}
+.hero-body-info h4{
+font-size: 1rem;
+font-family: "poppins";
+font-weight: 400;  
+color: #bcbcbc;
+}
+.hero-body-name{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    justify-content: center;
+    align-items: flex-end;  
+}
+.form_submit{
+    
+    width: 100%;
+    margin: 1rem 0;
+    border-radius: var(--roundness);
+    font-family: "poppins", sans-serif;
+    background-color: var(--accent1);
+    color: var(--background2);
+    border: none;
+    padding: 0.6rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    
+}
+.form_submit:hover{
+    background-color:#56fcff;
+}
+
+@media (max-width:500px) {
+    html,main,body{
+        background-color: #16191b;
+    }
+    .hero-body{
+        width: 100vw;
+        height: 100vh;
+        padding: 4rem 2rem;
+        box-sizing: border-box;
+        justify-content: flex-start;
+    }
+    .hero-body-info{
+        justify-content: flex-start;
+    }
+}

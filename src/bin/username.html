@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="css/register.css">
+</head>
+<body>
+    <div class="box" style="border-radius: 1rem;">
+        <h1 class="form_headline">MC Login</h1>
+        <form class="form_box" action="/login" method="post" novalidate>
+            <input type="text" id="username" required placeholder="Minecraft Username" >
+        </form>
+        <button style="margin-top: 20px;" class="form_submit" onclick="submit_form()">Save Username</button>
+        <p class="form_more"> </p>
+    </div>
+    <div class="error_box hidden">
+        <img src="media/svg/error.svg" alt="">
+        <p id="error_msg">Something went wrong</p>
+    </div>
+    <script>
+        function submit_form(){
+            const username = document.getElementById("username").value;
+            const error = document.getElementById("error_msg"); // use getElementById instead
+            const box = document.querySelector(".error_box"); // use querySelector instead
+            function close(){
+                setTimeout(() => {
+                    box.classList.add("hidden");
+                }, 2000);
+            }
+            if (!username) {
+                error.innerText = "Username is required";
+                box.classList.remove("hidden");
+                close()
+            }
+            else{
+                document.querySelector(".form_box").submit()
+            }
+            }
+        
+    </script>
+</body>
+</html>

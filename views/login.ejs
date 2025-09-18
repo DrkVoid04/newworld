@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trace Mc</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <div class="box">
+      <h1 class="form_headline">Log in</h1>
+      <form
+        data-error="<%= err %>"
+        class="form_box"
+        action="/login"
+        method="post"
+        novalidate
+      >
+        <input
+          type="text"
+          id="username"
+          name="name"
+          required
+          placeholder="Username or Email"
+        />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          required
+          placeholder="Password"
+        />
+      </form>
+      <a href="/reset" class="forgot_password">Forgot Password?</a>
+      <button class="form_submit" onclick="submit_form()">Log in</button>
+      <p class="form_more">Don't have an account? <a href="/signup">Create</a></p>
+    </div>
+    <div class="error_box hidden">
+      <img src="media/svg/error.svg" alt="" />
+      <p id="error_msg">Something went wrong</p>
+    </div>
+    <script>
+      const error = document.getElementById("error_msg"); // use getElementById instead
+      const box = document.querySelector(".error_box"); // use querySelector instead
+      function close() {
+        setTimeout(() => {
+          box.classList.add("hidden");
+        }, 2000);
+      }
+      function submit_form() {
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        if (!username) {
+          error.innerText = "Username or email is required";
+          box.classList.remove("hidden");
+          close();
+        } else if (!password) {
+          error.innerText = "Password is required";
+          box.classList.remove("hidden");
+          close();
+        } else {
+          document.querySelector(".form_box").submit();
+        }
+      }
+      //   page load errors
+      window.addEventListener("load", function () {
+        const err = document
+          .querySelector(".form_box")
+          .getAttribute("data-error");
+        if (err == "error-1") {
+          error.innerText = "Account not found";
+          box.classList.remove("hidden");
+          close();
+        }
+      });
+    </script>
+  </body>
+</html>

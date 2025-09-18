@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trace Mc</title>
+    <link rel="icon" type="image/png" href="media/favicon.png">
+    <link rel="stylesheet" href="css/history.css">
+</head>
+
+<body>
+    <main class="hero">
+        <div class="hero-head">
+            <h1><ul>
+                <li><a href="/home">Home</a></li>
+                <li><a class="sel" href="/admin-status">Status</a></li>
+                <li><a href="/create">Create</a></li>
+                <li><a href="/delete">Delete</a></li>
+            </ul></h1>
+        </div>
+        <div class="hero-body">
+            <!-- Second Section -->
+            <!-- <div class="hero-section less">
+                <div class="hero-body-info">
+                    <div class="hero-body-info-div">
+                        <h2>Vip</h2>
+                        <h3>Buy this rank to get cool perks in our SMP and many more rewards</h3>
+                    </div>
+                    <div class="hero-body-info-more">
+                        <h4><p>TXN ID: </p>DAFA87AFAS8FFSA</h4>
+                        <h4><p>ORDER ID: </p>DAFA87AFAS8FFSA</h4>
+                        <h4><p>Paid: </p>200.00 INR</h4>
+                        <h4><p>Date: </p>12/31/2024</h4>
+                    </div>
+                </div>
+                <div class="hero-body-name">
+                    <div class="form-div">
+                        <form class="form_box" action="/signup" method="post" novalidate>
+                            <textarea name="Description" id="desc" name="reason" rows="5" placeholder="Description *" required
+                                pattern="[a-zA-Z0-9]{3,12}"></textarea>
+                            <input type="hidden" name="orderId" value="kuchbhi">
+                        </form>
+                        <button class="form_submit button lol" onclick="submit_form()">Deny</button>
+                        <button class="button lol" onclick="approve('123')">Approve</button>
+                        <button class="button toggle hide">Show More</button>
+                    </div>
+                </div>
+            </div> -->
+            <%- html %>
+        </div>
+    </main>
+    <div class="error_box hidden">
+        <img src="media/svg/error.svg" alt="">
+        <p id="error_msg">Something went wrong</p>
+    </div>
+    <script>
+        document.querySelectorAll(".toggle").forEach((button) => {
+            document.querySelectorAll(".hero-section").forEach((section) => {
+                    section.classList.add("less");
+                    section.querySelector(".toggle").textContent = "Show More";
+                });
+            button.addEventListener("click", (e) => {
+                e.preventDefault(); // Prevent any default behavior
+                
+                // Open only the clicked section
+                const heroSection = button.closest(".hero-section");
+                heroSection.classList.toggle("less");
+
+                // Update the button text based on the new state
+                button.textContent = heroSection.classList.contains("less") ? "Show More" : "Show Less";
+            });
+        });
+
+        function submit_form(){
+            const reason = document.getElementById("desc").value;
+            const error = document.getElementById("error_msg"); // use getElementById instead
+            const box = document.querySelector(".error_box"); // use querySelector instead
+            function close(){
+                setTimeout(() => {
+                    box.classList.add("hidden");
+                }, 2000);
+            }
+            if (!reason) {
+                error.innerText = "Reason is required";
+                box.classList.remove("hidden");
+                close()
+            }
+            else{
+                document.querySelector(".form_box").submit()
+            }
+            }
+            function approve(id){
+                window.location.href = `/approved?orderId=${id}`
+            }
+    </script>
+</body>
+
+</html>
